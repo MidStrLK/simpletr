@@ -1,0 +1,67 @@
+<!doctype html>
+<html ng-app='myApp'>
+<head>
+    <meta charset="utf-8">
+    <title>Simple Tr</title>
+    <link rel="shortcut icon" href="favicon.png" type="image/png">
+    <!--<link rel="stylesheet" type="text/css" href="styles.css">-->
+</head>
+<body>
+
+<button ng-controller="ButtonsController" ng-click="check()">
+    check
+</button>
+
+
+<div>
+    <form name="answerForm" ng-submit="save(answer, answerForm)" ng-controller="FormController">
+
+        <label>
+            <input type="radio" ng-model="answer.type" ng-value="download">
+            Скачать
+        </label>
+        <label>
+            <input type="radio" ng-model="answer.type" value="remember">
+            Запомнить
+        </label>
+        <label>
+            <input type="radio" ng-model="answer.type" value="downloadandremember">
+            Скачать и запомнить
+        </label>
+
+        <select id="selectselect" name="selectselect" class="form-control" ng-model="answer.patch">
+            <option ng-repeat="item in trlist" value="{{item}}" >{{item}}</option>
+        </select>
+        <input id="answerAuthor" ng-model="answer.magnet" required placeholder="magnet?=" />
+        <input type="submit" id="submit" value="Отправить" />
+    </form>
+    <p ng-bind="response.text"></p>
+    <p ng-bind="response.author"></p>
+</div>
+
+<div ng-controller="TableController">
+    <table class="actual_table">
+        <tr  class="actual_tr" ng-repeat="x in trlist">
+            <td class="actual_name">{{ x.name }}</td>
+            <td class="actual_name">{{ x.status }}</td>
+            <td class="actual_name">{{ x.percent }} %</td>
+            <td class="actual_name">{{ x.type }}</td>
+            <td class="actual_name">{{ x.date }}</td>
+            <td class="actual_name">{{ x.directory }}</td>
+            <td class="actual_name">{{ x.errorString }}</td>
+        </tr>
+    </table>
+</div>
+
+<script src="/ext/angular.js"></script>
+<script type="text/javascript">
+    var myApp = angular.module('myApp', []);
+</script>
+<script src="js/controllers/RequestController.js"></script>
+<script src="js/controllers/FormController.js"></script>
+<script src="js/controllers/DropdownController.js"></script>
+<script src="js/controllers/ButtonsController.js"></script>
+<script src="js/controllers/TableController.js"></script>
+
+</body>
+</html>

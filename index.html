@@ -4,13 +4,13 @@
     <meta charset="utf-8">
     <title>Simple Tr</title>
     <link rel="shortcut icon" href="favicon.png" type="image/png">
-    <!--<link rel="stylesheet" type="text/css" href="styles.css">-->
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
 
-<button ng-controller="ButtonsController" ng-click="check()">
+<!--<button ng-controller="ButtonsController" ng-click="check()">
     check
-</button>
+</button>-->
 
 
 <div>
@@ -24,10 +24,10 @@
             <input type="radio" ng-model="answer.type" value="remember">
             Запомнить
         </label>
-        <label>
-            <input type="radio" ng-model="answer.type" value="downloadandremember">
-            Скачать и запомнить
-        </label>
+        <!--<label>-->
+            <!--<input type="radio" ng-model="answer.type" value="downloadandremember">-->
+            <!--Скачать и запомнить-->
+        <!--</label>-->
 
         <select id="selectselect" name="selectselect" class="form-control" ng-model="answer.patch">
             <option ng-repeat="item in trlist" value="{{item}}" >{{item}}</option>
@@ -39,16 +39,52 @@
     <p ng-bind="response.author"></p>
 </div>
 
+<h1>Актуальные</h1>
 <div ng-controller="TableController">
     <table class="actual_table">
-        <tr  class="actual_tr" ng-repeat="x in trlist">
-            <td class="actual_name">{{ x.name }}</td>
-            <td class="actual_name">{{ x.status }}</td>
-            <td class="actual_name">{{ x.percent }} %</td>
-            <td class="actual_name">{{ x.type }}</td>
-            <td class="actual_name">{{ x.date }}</td>
-            <td class="actual_name">{{ x.directory }}</td>
-            <td class="actual_name">{{ x.errorString }}</td>
+        <tr class="actual_table_header">
+            <td>Название</td>
+            <td>Статус</td>
+            <td>Завершено, %</td>
+            <td class="dir-actual-row">Директория</td>
+            <td class="error-row">Ошибка</td>
+        </tr>
+        <tr  class="actual_tr" ng-repeat="x in actualtrlist">
+            <td>{{ x.name }}</td>
+            <td>{{ x.status }}</td>
+            <td>{{ x.percent }}</td>
+            <td>{{ x.directory }}</td>
+            <td>{{ x.errorString }}</td>
+        </tr>
+    </table>
+
+    <h1>Завершенные</h1>
+    <table class="done_table">
+        <tr class="done_table_header">
+            <td>Название</td>
+            <td class="dir-done-row">Директория</td>
+        </tr>
+        <tr  class="done_tr" ng-repeat="x in donetrlist">
+            <td>{{ x.name }}</td>
+            <td class="dir-done-row">{{ x.directory }}</td>
+        </tr>
+    </table>
+
+    <h1>Периодичные</h1>
+    <table class="periodic_table">
+        <tr class="periodic_table_header">
+            <td>Название</td>
+            <td class="dir-periodic-row">Директория</td>
+            <td class="count-row">Скачано</td>
+            <td class="delete-row">Удалить</td>
+        </tr>
+        <tr  class="periodic_tr" ng-repeat="x in periodtrlist">
+            <td>{{ x.name }}</td>
+            <td class="dir-periodic-row">{{ x.directory }}</td>
+            <td class="count-row">{{ x.count }}</td>
+            <td class="delete-row"><button ng-controller="ButtonsController" ng-click="delete(x.name)">
+                Удалить
+            </button></td>
         </tr>
     </table>
 </div>
@@ -57,7 +93,7 @@
 <script type="text/javascript">
     var myApp = angular.module('myApp', []);
 </script>
-<script src="js/controllers/RequestController.js"></script>
+
 <script src="js/controllers/FormController.js"></script>
 <script src="js/controllers/DropdownController.js"></script>
 <script src="js/controllers/ButtonsController.js"></script>

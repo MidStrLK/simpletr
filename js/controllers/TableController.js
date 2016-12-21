@@ -1,14 +1,25 @@
 myApp.controller('TableController',
     function TableController($scope, $http){
 
-        setInterval(function(){
-            $http.get('/check').success(function(data) {
-
-
+        var checkFunction = function(){
+            $http.get('/api/check').success(function(data) {
                 if(data && typeof data === 'string') data = JSON.parse(data);
-                console.info('data - ',data, typeof data);
-                $scope.trlist = data;
+                console.info('check - ',data, typeof data);
+
+                $scope.actualtrlist = data.actual;
+                $scope.donetrlist   = data.done;
+                $scope.periodtrlist = data.periodic;
             });
-        }, 5000);
+        };
+
+        checkFunction();
+        setInterval(checkFunction, 5000*10000);
+
+        //$http.get('/api/periodic').success(function(data) {
+        //    if(data && typeof data === 'string') data = JSON.parse(data);
+        //    console.info('data - ',data, typeof data);
+        //    $scope.perlist = data;
+        //});
+
     }
 );

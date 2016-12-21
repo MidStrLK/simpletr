@@ -1,14 +1,13 @@
-var options = require("../options");
+var utils = require("./utils");
 
 /* передача на сервер функции */
-exports.getCombo = getCombo;
+exports.exp = getCombo;
 
 function getCombo(callback){
-    var list = options.patchCombo,
+    var list = utils.getOptions('patchCombo'),
         res = [];
 
     for(var key in list){
-
         res.push(key);
     }
 

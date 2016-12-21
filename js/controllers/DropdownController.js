@@ -5,7 +5,7 @@ myApp.controller('DropdownController',
 
         $http({
             method: 'GET',
-            url: '/getcombo',
+            url: '/api/getcombo',
             data: {applicationId: 3}
         }).success(function (result) {
             $scope.testAccounts = result;

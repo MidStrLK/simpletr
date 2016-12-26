@@ -52,7 +52,7 @@ function rememberTr(patch, link, callback, COLLECTION, TELEGRAM){
             fullCallback();
         },
         countCallback = function(data){
-            count = data - +!utils.isTestMode();
+            count = data;// - +!utils.isTestMode();
             fullCallback();
         },
         nameCallback = function(data){

@@ -32,7 +32,7 @@ function periodicCheck(COLLECTION){
 }
 
 function reDownload(data, COLLECTION){
-
+console.info('reDownload - ',data);
     var downloadData = {
             patch: data.directory,
             magnet: data.magnet

@@ -80,7 +80,16 @@ function updateDB(_id, data, COLLECTION){
             updateDB(_id, data);
         })
     }else{
-        COLLECTION.update({_id: _id}, data);
+        //COLLECTION.update({_id: _id}, data);
+
+        removeDB({_id: _id},function(err, result){
+            if(!err){
+                insertDB(data, null, COLLECTION)
+            }else{
+                console.info('err - ',err);
+            }
+
+        }, COLLECTION);
     }
 }
 

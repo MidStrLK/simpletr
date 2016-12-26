@@ -40,7 +40,7 @@ function submitRequest(response, handle, pathname, postData, COLLECTION, TELEGRA
             }else if (pathname === '/getcombo') {
                 combo.exp(func);
             }else if (pathname === '/check') {
-                check.exp(func, COLLECTION);
+                check.exp(func, COLLECTION, null , TELEGRAM);
             }else if (pathname === '/periodic') {
                 periodic.exp(func, COLLECTION);
             }else if (pathname === '/checkall') {

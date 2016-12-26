@@ -6,7 +6,7 @@ exports.exp   = check;
 exports.runCheck = checkInterval;
 
 /* ПРОВЕРЯЕТ ЗАГРУЖЕННЫЕ И ЗАГРУЖАЕМЫЕ */
-function check(callback, COLLECTION, isBot){
+function check(callback, COLLECTION, isBot, TELEGRAM){
     var func = function(actualArr, doneArr, periodicArr){
 
         var res = '';
@@ -19,10 +19,14 @@ function check(callback, COLLECTION, isBot){
             })
 
         }else{
+
+            var bot = !!(TELEGRAM && TELEGRAM.messageChatId);
+
             res = {
                 actual:     actualArr,
                 done:       doneArr,
-                periodic:   periodicArr
+                periodic:   periodicArr,
+                telegram:   bot
             }
         }
 

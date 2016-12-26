@@ -9,6 +9,7 @@ myApp.controller('TableController',
                 $scope.actualtrlist = data.actual;
                 $scope.donetrlist   = data.done;
                 $scope.periodtrlist = data.periodic;
+                $scope.telegram     = data.telegram ? 'Телеграм подключен' : '>>> ТЕЛЕГРАМ НЕ ПОДКЛЮЧЕН <<<';
             });
         };
 

@@ -1,6 +1,7 @@
 var http                = require("http"),
     url                 = require("url"),
     periodiccheck       = require("./periodiccheck"),
+    check               = require("./check"),
     telegrambot         = require("./telegrambot"),
     mongodb             = require("../mongo/mongodb"),
     COLLECTION,
@@ -14,6 +15,8 @@ exports.start = start;
 function start(route, handle) {
 
     periodicCheck();
+
+    checkDone();
 
     function onRequest(request, response) {
         var postData = "";
@@ -61,6 +64,24 @@ function periodicCheck(){
     if(COLLECTION) {
         if (TELEGRAM) {
             periodiccheck.exp(COLLECTION, TELEGRAM);
+        } else {
+            telegrambot.getBot(function (data) {
+                TELEGRAM = data;
+                periodicCheck();
+            });
+        }
+    }else{
+        mongodb.getCollectionMDB(function(COLL){
+            COLLECTION = COLL;
+            periodicCheck();
+        })
+    }
+}
+
+function checkDone(){
+    if(COLLECTION) {
+        if (TELEGRAM) {
+            check.exp(null, COLLECTION, false, TELEGRAM, true)
         } else {
             telegrambot.getBot(function (data) {
                 TELEGRAM = data;

@@ -6,7 +6,7 @@ exports.exp   = check;
 exports.runCheck = checkInterval;
 
 /* ПРОВЕРЯЕТ ЗАГРУЖЕННЫЕ И ЗАГРУЖАЕМЫЕ */
-function check(callback, COLLECTION, isBot, TELEGRAM){
+function check(callback, COLLECTION, isBot, TELEGRAM, isRemove){
     var func = function(actualArr, doneArr, periodicArr){
 
         var res = '';
@@ -33,7 +33,7 @@ function check(callback, COLLECTION, isBot, TELEGRAM){
         callback(0, res);
     };
 
-    checkOnce(func, COLLECTION);
+    checkOnce(func, COLLECTION, isRemove);
 }
 
 function checkInterval(COLLECTION, TELEGRAM){

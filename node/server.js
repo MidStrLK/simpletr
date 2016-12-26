@@ -6,7 +6,7 @@ var http                = require("http"),
     mongodb             = require("../mongo/mongodb"),
     COLLECTION,
     TELEGRAM,
-	server_port         = 8001,
+	server_port         = 3002,
 	server_ip_address   = '127.0.0.1';
 
 
@@ -85,13 +85,13 @@ function checkDone(){
         } else {
             telegrambot.getBot(function (data) {
                 TELEGRAM = data;
-                periodicCheck();
+                checkDone();
             });
         }
     }else{
         mongodb.getCollectionMDB(function(COLL){
             COLLECTION = COLL;
-            periodicCheck();
+            checkDone();
         })
     }
 }

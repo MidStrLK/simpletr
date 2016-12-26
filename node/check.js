@@ -7,6 +7,7 @@ exports.runCheck = checkInterval;
 
 /* ПРОВЕРЯЕТ ЗАГРУЖЕННЫЕ И ЗАГРУЖАЕМЫЕ */
 function check(callback, COLLECTION, isBot, TELEGRAM, isRemove){
+    console.info('isRemove - ',isRemove);
     var func = function(actualArr, doneArr, periodicArr){
 
         var res = '';

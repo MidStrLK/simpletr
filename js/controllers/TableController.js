@@ -13,7 +13,7 @@ myApp.controller('TableController',
         };
 
         checkFunction();
-        setInterval(checkFunction, 5000*10000);
+        setInterval(checkFunction, 5000);
 
         //$http.get('/api/periodic').success(function(data) {
         //    if(data && typeof data === 'string') data = JSON.parse(data);

@@ -65,7 +65,7 @@ function insertDB(data, callback, COLLECTION){
         })
     }else{
         if(!callback) callback = function(err, result){
-            console.info(formatDate.dateToLocal(), '-MDB_reply- insert - err:', err, ', result: ', (result && result.length) ? result.length : '');
+            if(err) console.info(formatDate.dateToLocal(), '-MDB_reply- insert - err:', err, ', result: ', (result && result.length) ? result.length : '');
         };
         COLLECTION.insert(data, callback);
     }
@@ -94,7 +94,7 @@ function selectDB(data, callback, COLLECTION){
     }else {
         var cursor = COLLECTION.find(data);
         cursor.toArray(function (err, result) {
-            console.info(formatDate.dateToLocal(), '-MDB_reply- select - err:', err, ', result: ', (result && result.length) ? result.length : '');
+            if(err) console.info(formatDate.dateToLocal(), '-MDB_reply- select - err:', err, ', result: ', (result && result.length) ? result.length : '');
             if (callback) callback(err, result);
         });
 
@@ -142,7 +142,7 @@ function countCategory(cursor, callback){
 /* Находим БД */
 function connectMongo(callback){
     mongo.connect('mongodb://'+connection_string, function(err, db) {												// connect to database server
-        console.info(formatDate.dateToLocal(), '-MDB- db connect - err:', err, ', result: ', !!db);
+        if(err) console.info(formatDate.dateToLocal(), '-MDB- db connect - err:', err, ', result: ', !!db);
         if(!err) {
             opendb = db;
             callback();
@@ -159,7 +159,7 @@ function collectionMongo(callback){
         })
     }else{
         opendb.collection(name, function(err, collectionref) {		// ссылки на коллекции
-            console.info(formatDate.dateToLocal(), '-MDB- collection connect - err:', err, ', result: ', !!collectionref);
+            if(err) console.info(formatDate.dateToLocal(), '-MDB- collection connect - err:', err, ', result: ', !!collectionref);
             if(!err){
                 openconnection[name] = collectionref;
                 callback(collectionref);

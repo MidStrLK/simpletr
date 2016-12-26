@@ -24,7 +24,7 @@ exports.linkOptions = [
 
 exports.testMode = false;
 
-exports.periodicInterval = 1;       // Минуты
+exports.periodicInterval = 60;       // Минуты
 
 exports.transmissionAnswer = {
     arguments: {

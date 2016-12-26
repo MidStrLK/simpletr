@@ -31,7 +31,7 @@ function check(callback, COLLECTION, isBot, TELEGRAM, isRemove){
             }
         }
 
-        callback(0, res);
+        if(callback && typeof callback === 'function') callback(0, res);
     };
 
     checkOnce(func, COLLECTION, isRemove);

@@ -103,7 +103,7 @@ function checkCallback(body, callback, COLLECTION, isRemove){
  * getResponceList || submitRequest(remove),  setMD -> getResponceList */
 function checkDoneTr(data, callback, COLLECTION, isRemove){
     var ids = getRemoveIds(data);
-
+console.info('remove - ',ids);
     if(isRemove && ids && ids.length && ids.forEach){
     // Удаляем
         var removeBody = JSON.stringify({

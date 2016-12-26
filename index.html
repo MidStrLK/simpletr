@@ -35,13 +35,17 @@
         <input id="answerAuthor" ng-model="answer.magnet" required placeholder="magnet?=" />
         <input type="submit" id="submit" value="Отправить" />
     </form>
-    <span class="telegram" ng-model="telegram"></span>
+
     <p ng-bind="response.text"></p>
     <p ng-bind="response.author"></p>
 </div>
 
-<h1>Актуальные</h1>
+
 <div ng-controller="TableController">
+
+    <p class="telegram" ng-bind-html="telegram"></p>
+
+    <h1>Актуальные</h1>
     <table class="actual_table">
         <tr class="actual_table_header">
             <td>Название</td>

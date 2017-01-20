@@ -25,8 +25,8 @@ function check(callback, COLLECTION, isBot, TELEGRAM, isRemove){
 
             res = {
                 actual:     actualArr,
-                done:       doneArr,
-                periodic:   periodicArr,
+                done:       doneArr.reverse(),
+                periodic:   periodicArr.reverse(),
                 telegram:   bot
             }
         }
@@ -192,17 +192,19 @@ function getActualList(data){
 function getRemoveList(data){
     var res = [];
 
-    data.forEach(function(val){
-        if(val['doneDate'] && val['status'] > 5) {
-            res.push({
-                date:       val['doneDate'] || '',
-                name:       val['name'] || '',
-                status:     'Done',
-                type:       'once',
-                directory:  val['downloadDir'] || ''
-            });
-        }
-    });
+    if(data && data.forEach){
+        data.forEach(function(val){
+            if(val['doneDate'] && val['status'] > 5) {
+                res.push({
+                    date:       val['doneDate'] || '',
+                    name:       val['name'] || '',
+                    status:     'Done',
+                    type:       'once',
+                    directory:  val['downloadDir'] || ''
+                });
+            }
+        });
+    }
 
     return res;
 }

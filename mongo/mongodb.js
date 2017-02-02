@@ -64,8 +64,10 @@ function addIDs(COLLECTION){
             delete res[key]['_id'];
             res[key]['id'] = generateId();
         });
-        COLLECTION.remove();
-        COLLECTION.insert(res);
+        COLLECTION.remove(null, function(COLLECTION){
+            COLLECTION.insert(res);
+        });
+
     };
 
     selectDB(null, callbackGet, COLLECTION);
@@ -77,13 +79,17 @@ function decreaseCheck(id, callback, COLLECTION){
         console.info('res - ',res);
 
         if(res && res[0]){
-            COLLECTION.remove({id: res[0].id});
 
             res[0].count = +res[0].count - 1;
 
             delete res[0]._id;
+
+            COLLECTION.remove({id: res[0].id}, function(){
+                COLLECTION.insert(res)
+            });
+
             console.info('res - ',res);
-            COLLECTION.insert(res)
+
         }
 
         //res.forEach(function(val, key){

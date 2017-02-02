@@ -79,7 +79,12 @@ function rememberTr(patch, link, callback, COLLECTION, TELEGRAM){
                     patch: patch,
                     magnet: magnet
                 },
+                generateId = function(n) {  // [ 2 ] random words and digits
+                    if (!n) n = 10;
+                    return Math.random().toString(36).slice(2, 2 + Math.max(1, Math.min(n, 10)));
+                },
                 mongoData = {
+                    id:         generateId(),
                     link:       link,
                     name:       name,
                     count:      count,

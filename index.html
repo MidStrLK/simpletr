@@ -87,9 +87,9 @@
             <td><a href="{{x.link}}">{{ x.name }}</a></td>
             <td class="dir-periodic-row">{{ x.directory }}</td>
             <td class="count-row">{{ x.count }}</td>
-            <td class="delete-row"><button ng-controller="ButtonsController" ng-click="delete(x.name)">
-                Удалить
-            </button></td>
+            <td class="delete-row"><button ng-controller="ButtonsController" ng-click="delete(x.id)">Удалить</button></td>
+            <td class="ids-row"><button ng-controller="ButtonsController" ng-click="iddids(x.id)">IDs</button></td>
+            <td class="ids-row"><button ng-controller="ButtonsController" ng-click="decrease(x.id)">decrease</button></td>
         </tr>
     </table>
 </div>

@@ -16,7 +16,27 @@ myApp.controller('ButtonsController',
             };
 
 
-            $http.post("/api/remove", JSON.stringify({name: String(id)})).then(successCallback, successCallback);
+            $http.post("/api/remove", JSON.stringify({id: String(id)})).then(successCallback, successCallback);
+        };
+
+        $scope.iddids = function (id){
+
+            var successCallback = function(data){
+                console.info('remove - ',data);
+            };
+
+
+            $http.get("/api/addids").then(successCallback, successCallback);
+        };
+
+        $scope.decrease = function (id){
+
+            var successCallback = function(data){
+                console.info('remove - ',data);
+            };
+
+
+            $http.post("/api/decrease", JSON.stringify({id: String(id)})).then(successCallback, successCallback);
         };
     }
 );

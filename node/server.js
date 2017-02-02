@@ -6,7 +6,7 @@ var http                = require("http"),
     mongodb             = require("../mongo/mongodb"),
     COLLECTION,
     TELEGRAM,
-	server_port         = 3002,
+	server_port         = 5002,
 	server_ip_address   = '127.0.0.1';
 
 

@@ -5,6 +5,7 @@ var fs              = require("fs"),
     check           = require("./check"),
     periodic        = require("./periodic"),
     checkall        = require("./checkall"),
+    mongodb   = require("../mongo/mongodb"),
     remove          = require("./remove");
 
 function submitRequest(response, handle, pathname, postData, COLLECTION, TELEGRAM) {
@@ -47,6 +48,10 @@ function submitRequest(response, handle, pathname, postData, COLLECTION, TELEGRA
                 checkall.exp(func, COLLECTION);
             }else if (pathname === '/remove') {
                 remove.exp(postData, func, COLLECTION);
+            }else if (pathname === '/addids') {
+                mongodb.addIDs(COLLECTION);
+            }else if (pathname === '/decrease') {
+                mongodb.decreaseCheck(postData, func, COLLECTION);
             }else {
                 response['writeHead'](500, {'Content-Type': 'application/json', 'charset': 'utf-8'});
                 response.write('Ошибка в запросе к БД ' + path);

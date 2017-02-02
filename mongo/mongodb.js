@@ -24,6 +24,9 @@ exports.updateMD             = updateMD;
 
 exports.removeDB = removeDB;
 
+exports.decreaseCheck = decreaseCheck;
+exports.addIDs = addIDs;
+
 
 /*-------------------------------------------------------------------------------------------------------------------*/
 
@@ -47,6 +50,58 @@ function updateMD(_id, data, COLLECTION){
 
 function selectList(callback, COLLECTION){
     selectDB(null, callback, COLLECTION)
+}
+
+function addIDs(COLLECTION){
+    var callbackGet = function(err, res){
+        res.forEach(function(val, key){
+
+            var generateId = function(n) {  // [ 2 ] random words and digits
+                if (!n) n = 10;
+                return Math.random().toString(36).slice(2, 2 + Math.max(1, Math.min(n, 10)));
+            };
+
+            delete res[key]['_id'];
+            res[key]['id'] = generateId();
+        });
+        COLLECTION.remove();
+        COLLECTION.insert(res);
+    };
+
+    selectDB(null, callbackGet, COLLECTION);
+}
+
+function decreaseCheck(id, callback, COLLECTION){
+    console.info('name - ',name);
+    var callbackGet = function(err, res){
+        console.info('res - ',res);
+
+        if(res && res[0]){
+            COLLECTION.remove({id: res[0].id});
+
+            res[0].count = +res[0].count - 1;
+
+            delete res[0]._id;
+            console.info('res - ',res);
+            COLLECTION.insert(res)
+        }
+
+        //res.forEach(function(val, key){
+        //
+        //    var generateId = function(n) {  // [ 2 ] random words and digits
+        //        if (!n) n = 10;
+        //        return Math.random().toString(36).slice(2, 2 + Math.max(1, Math.min(n, 10)));
+        //    };
+        //
+        //    delete res[key]['_id'];
+        //    res[key]['id'] = generateId();
+        //});
+        //COLLECTION.remove();
+        //COLLECTION.insert(res);
+    };
+
+    selectDB(id, callbackGet, COLLECTION);
+
 }
 
 /*--- ВЫСШИЙ УРОВЕНЬ ---*/

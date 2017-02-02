@@ -58,14 +58,14 @@ function addIDs(COLLECTION){
 
             var generateId = function(n) {  // [ 2 ] random words and digits
                 if (!n) n = 10;
-                
+
                 return Math.random().toString(36).slice(2, 2 + Math.max(1, Math.min(n, 10)));
             };
 
             delete res[key]['_id'];
             res[key]['id'] = generateId();
         });
-        COLLECTION.remove(null, function(COLLECTION){
+        COLLECTION.remove(null, function(){
             COLLECTION.insert(res);
         });
 
@@ -86,10 +86,8 @@ function decreaseCheck(id, callback, COLLECTION){
             delete res[0]._id;
 
             COLLECTION.remove({id: res[0].id}, function(){
-                COLLECTION.insert(res)
+                COLLECTION.insert(res, callback)
             });
-
-            console.info('res - ',res);
 
         }
 

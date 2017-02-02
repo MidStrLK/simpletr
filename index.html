@@ -84,7 +84,7 @@
             <td class="delete-row">Удалить</td>
         </tr>
         <tr  class="periodic_tr" ng-repeat="x in periodtrlist">
-            <td>{{ x.name }}</td>
+            <td><a href="{{x.link}}">{{ x.name }}</a></td>
             <td class="dir-periodic-row">{{ x.directory }}</td>
             <td class="count-row">{{ x.count }}</td>
             <td class="delete-row"><button ng-controller="ButtonsController" ng-click="delete(x.name)">

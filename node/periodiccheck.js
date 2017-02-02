@@ -10,17 +10,21 @@ function periodicCheck(COLLECTION){
 
     setInterval(function(){
         var func = function(err, data){
-
+console.info('periodicCheck - ',data);
             if(data && data.forEach){
                 data.forEach(function(val){
                     var trOptions = utils.getTrOptions(val.link),
                         countCallback = function(count){
+                            console.info('BD -> count - ',val.count, count);
                             if(val.count < count){
                                 console.log('intervalCheck', val.count, count);
                                 val.count = count;
                                 reDownload(val, COLLECTION)
                             }
                         };
+
+                    console.info('trOptions - ',trOptions);
+
                     utils.getFromSite(val.link, 'count',  trOptions.count,  trOptions.countText,  countCallback);
                 })
             }
